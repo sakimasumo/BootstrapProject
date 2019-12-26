@@ -493,7 +493,41 @@
             </div>
         </div>
     </footer>
+    <button type="button" class="btn btn-primary" id="backbtn">
+        トップに戻る<span class="badge badge-light"><i class="fa fa-arrow-up"></i></span>
+    </button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $(function() {
+        // #で始まるリンクをクリックしたら実行されます
+        $('a[href^="#"]').click(function() {
+            // スクロールの速度
+            var speed = 600; // ミリ秒で記述
+            var href = $(this).attr("href");
+            var target = $(href == "#" || href == "" ? 'html' : href);
+            var position = target.offset().top;
+            $('body,html').animate({ scrollTop: position }, speed, 'swing');
+            return false;
+        });
+    });
+    $(function() {
+        var topBtn = $('#backbtn');
+        topBtn.hide();
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 500) {
+                topBtn.fadeIn();
+            } else {
+                topBtn.fadeOut();
+            }
+        });
+        topBtn.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 500);
+            return false;
+        });
+    });
+    </script>
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
